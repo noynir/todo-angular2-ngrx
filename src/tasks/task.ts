@@ -5,5 +5,6 @@ export class Task {
 
   constructor(title: string) {
     this.title = title;
+    this.id = (new Date().getTime()).toString();
   }
 }

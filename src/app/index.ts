@@ -24,9 +24,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes, {useHash: false}),
-    StoreModule.provideStore({
-      tasks: taskReducer
-    }),
+    StoreModule.provideStore(taskReducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     TasksModule
   ],

@@ -11,7 +11,7 @@ export class TaskService {
 
   constructor(private actions: TaskActions, private store: Store<any>) {
     this.tasks$ = store.select('tasks') as Observable<Task[]>;
-    store.dispatch(this.actions.fetchTasks());
+    //store.dispatch(this.actions.fetchTasks());
   }
 
   createTask(title: string): void {

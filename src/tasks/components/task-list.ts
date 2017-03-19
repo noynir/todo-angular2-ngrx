@@ -18,7 +18,7 @@ import { Task } from '../task';
 
     <div class="task-list">
       <task-item 
-        *ngFor="let task of tasks | async | filterTasks:filter"
+        *ngFor="let task of tasks "
         [task]="task"
         (remove)="remove.emit(task)"
         (update)="update.emit({task: task, changes: $event})"></task-item>
@@ -28,7 +28,7 @@ import { Task } from '../task';
 
 export class TaskListComponent {
   @Input() filter: string;
-  @Input() tasks: Observable<Task[]>;
+  @Input() tasks: Task[];
 
   @Output() remove: EventEmitter<any> = new EventEmitter(false);
   @Output() update: EventEmitter<any> = new EventEmitter(false);

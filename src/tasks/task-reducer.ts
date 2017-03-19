@@ -3,24 +3,23 @@ import { Task } from './task';
 import { TaskActions } from './task-actions';
 
 
-export const taskReducer: ActionReducer<Task[]> = (state: Task[] = [], {payload, type}: Action) => {
-  switch (type) {
-    case TaskActions.CREATE_TASK_FULFILLED:
-      return [ ...state, payload.task ];
+export interface AppState{
+  tasks:Task[]
+}
 
-    case TaskActions.DELETE_TASK_FULFILLED:
-      return state.filter((task: Task) => {
-        return task.id !== payload.task.id;
-      });
+const initialState:AppState = {
+  tasks:[]
+};
 
-    case TaskActions.FETCH_TASKS_FULFILLED:
-      return payload.tasks || [];
 
-    case TaskActions.UPDATE_TASK_FULFILLED:
-      return state.map((task: Task) => {
-        return task.id === payload.task.id ? payload.task : task;
-      });
-
+export const taskReducer = (state: AppState = initialState, action: Action):AppState => {
+  switch (action.type) {
+    case TaskActions.CREATE_TASK:
+      return Object.assign({},state,{tasks:[ ...(state.tasks), action.payload.task]});
+    case TaskActions.DELETE_TASK:
+      return Object.assign({},state,{tasks:state.tasks.filter((task: Task) => task.id != action.payload.taskId)});
+    case TaskActions.UPDATE_TASK:
+      return Object.assign({},state,{tasks:state.tasks.map((task: Task) => task.id == action.payload.taskId ? Object.assign({},task,action.payload.changes): task)});
     default:
       return state;
   }

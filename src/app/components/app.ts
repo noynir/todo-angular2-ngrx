@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
       <div class="g-row">
         <div class="g-col">
           <h1 class="header__title">Todo Angular2 NgRx</h1>
-          <a class="header__link" href="https://github.com/r-park/todo-angular2-ngrx"></a>
+          <a class="header__link" href="https://github.com/noynir/todo-angular2-ngrx"></a>
         </div>
       </div>
     </header>
