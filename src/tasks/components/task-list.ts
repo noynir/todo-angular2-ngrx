@@ -18,7 +18,7 @@ import { Task } from '../task';
 
     <div class="task-list">
       <task-item 
-        *ngFor="let task of tasks | async | filterTasks:filter"
+        *ngFor="let task of tasks | filterTasks:filter"
         [task]="task"
         (remove)="remove.emit(task)"
         (update)="update.emit({task: task, changes: $event})"></task-item>
