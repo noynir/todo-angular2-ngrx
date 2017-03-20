@@ -24,8 +24,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes, {useHash: false}),
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
     TasksModule
+
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'}
