@@ -7,6 +7,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { TasksModule, taskReducer } from 'src/tasks';
 import { AppComponent } from './components/app';
+import {EffectsModule} from "@ngrx/effects";
+import {TaskEffects} from "../tasks/task-effects";
 
 
 const routes: Routes = [
@@ -25,6 +27,7 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes, {useHash: false}),
     StoreModule.provideStore(taskReducer),
+    EffectsModule.run(TaskEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     TasksModule
   ],
