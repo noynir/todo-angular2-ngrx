@@ -68,7 +68,7 @@ To the ngrx/store by creating a state,recucers and actions.
             |___tasks
                 |   task-reducer.ts
     ```
-2. inside tasks-reducer file create an interface and intial state to define the state strcuture.
+2. inside tasks-reducer file create an interface and initial state to define the state structure.
     ```typescript
         export interface AppState{
           tasks:Task[]
@@ -88,8 +88,8 @@ To the ngrx/store by creating a state,recucers and actions.
                         |   task-actions.ts
             ```
     
-4.  now we go back the tasks-reducer and implement a reducer function,
-        a reducer function receives state and an action, and returns a new state and if it doesn't do anything then it should return the same state
+4.  now go back to the tasks-reducer and implement a reducer function,
+        a reducer function receives a state and an action, and returns a new state. if it doesn't do anything then it should return the same state
        ```typescript
         export const taskReducer = (state: AppState = initialState, action: Action):AppState => {
           switch (action.type) {
@@ -100,8 +100,8 @@ To the ngrx/store by creating a state,recucers and actions.
         };
        
        ```
-5. now that we have a reducer all setup, we to setup the store in our app.module.
-    the app module is inside the the app folder inside the index.ts file.
+5. now that we have a reducer all setup, we need to setup the store in our app.module.
+    the app module is inside the app folder inside the index.ts file.
     add the following line to the app.module imports.
      ```typescript
         StoreModule.provideStore(taskReducer)
@@ -128,13 +128,14 @@ To the ngrx/store by creating a state,recucers and actions.
   
   Step2 - Real World - Adding Effects
   --------------
-  In this step we will add ngrx/effects to handle the async action we are making to fetch, create, update, delete tasks.
+  In this step we will add ngrx/effects to handle the async action we are making to fetch, create, update and delete tasks.
   
-  1.  so first we need to add a few actions, because we have async actions every action will have a start and an end action
+  1.  so first we need to add a few actions. 
+      because we have async actions, every action will have a start and an end action.
       so basically we need to add to every action we created another action for the completed state. for instance we will now have a 
-      create_action and create_action_completed action.
+      create_task and create_task_completed action.
   2.  becuase now we are also fetching the tasks from the server 
-      we also need 2 new actions for fetch_action and fetch_action_completed.
+      we also need 2 new actions for fetch_task and fetch_task_completed.
   2.  now let's setup the tasks effects:
       * create a file named tasks-effects inside the tasks folder
       ```
@@ -153,7 +154,7 @@ To the ngrx/store by creating a state,recucers and actions.
                           |_____services
                                 |   api-service.ts
             ```
-        * implement 4 effects for every action each effect will end up with the matching completed action.
+        * implement 4 effects for every action. each effect will end up with a matching completed action.
       ```typescript
 
       @Injectable()
@@ -167,31 +168,32 @@ To the ngrx/store by creating a state,recucers and actions.
       
           @Effect()
           createTask$ = this.actions$
-              .ofType(//Create_Action)
+              .ofType(//Create_Task)
               .switchMap(//api calls here)
-              .map(//Create_Action_completed here)
+              .map(//Create_Task_completed here)
       
           @Effect()
           deleteTask$ = this.actions$
-              .ofType(//delete_Action)
+              .ofType(//delete_Task)
               .switchMap(//api calls here)
-              .map(//delete_Action_completed here)
+              .map(//delete_Task_completed here)
       
           @Effect()
           fetchTasks$ = this.actions$
-              .ofType(//fetch_Action)
+              .ofType(//fetch_Tasks)
               .switchMap(//api calls here)
-               .map(//fetch_Action_completed here)
+               .map(//fetch_Tasks_completed here)
       
           @Effect()
           updateTask$ = this.actions$
-              .ofType(//update_Action)
+              .ofType(//update_Task)
               .switchMap(//api calls here)
-              .map(//update_Action_completed here)
+              .map(//update_Task_completed here)
       ```
       * in your reducer you need to:
-        * add a handle to the fetch_action_completed
-        * change all cases to handle the *_action_completed
+        * add a handle to the fetch_task_completed
+        * change all existing cases to handle the *_task_completed
+    
     
 
     
